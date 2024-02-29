@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ProtoneMedia\Splade\FormBuilder\Input;
+use ProtoneMedia\Splade\FormBuilder\Password;
+use ProtoneMedia\Splade\FormBuilder\Submit;
+use ProtoneMedia\Splade\SpladeForm;
 
 class UserController extends Controller
 {
@@ -11,7 +15,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $form = SpladeForm::make()
+        ->class('space-y-4')
+            ->action(route('users.store'))
+            ->fields([
+                Input::make('name')->label('Full Name'),
+                Input::make('email')->label('Email'),
+                Password::make('password')->label('Password'),
+                Submit::make()->label('Register')->class('btn btn-primary'),
+            ]);
+        return view('user.seeker-register', [
+            'form' => $form,
+        ]);
     }
 
     /**
