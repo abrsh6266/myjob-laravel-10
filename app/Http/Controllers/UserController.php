@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\FormBuilder\Input;
 use ProtoneMedia\Splade\FormBuilder\Password;
@@ -42,7 +43,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create($request->validated());
+        Splade::toast('City successfully created!')->autoDismiss(3);
+
+        return to_route('admin.cities.index');
     }
 
     /**
