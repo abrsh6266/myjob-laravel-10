@@ -28,21 +28,21 @@ Route::middleware('splade')->group(function () {
     // Registers routes to support async File Uploads with Filepond...
     Route::spladeUploads();
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
-
-    Route::middleware('auth')->group(function () {
-        Route::get('/dashboard', function () {
+       Route::middleware(['verified'])->group(function () {
+        Route::get('/', function () {
             return view('dashboard');
-        })->middleware(['verified'])->name('dashboard');
+        })->name('dashboard');
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
-    Route::middleware('auth')->group(function () {
+    Route::middleware([])->group(function () {
         Route::resource('/users', UserController::class);
+        Route::get('/register/seeker',[UserController::class,'registerSeeker'])->name('seeker');
+        Route::get('/register/employer',[UserController::class,'registerEmployer'])->name('employer'); 
     });
     require __DIR__.'/auth.php';
 });
+Route::get('/verify', [UserController::class,'verify'])->name('[verification.notice');
+

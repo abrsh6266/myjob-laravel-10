@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use ProtoneMedia\Splade\Facades\Splade;
+use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -42,13 +44,13 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'user_type' => 'seeker'
+            'user_trial' =>$request->user_type == 'employer'?  now()->addWeek() : null,
         ]);
-
-        event(new Registered($user));
-
+        $role = Role::where('name',$request->user_type)->first();
+        $user->assignRole($role);
         Auth::login($user);
-
+        Splade::toast('Your Account has been created!')->autoDismiss(3);
+        event(new Registered($user));
         return redirect(RouteServiceProvider::HOME);
     }
 }

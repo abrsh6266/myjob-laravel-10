@@ -43,10 +43,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($request->validated());
-        Splade::toast('City successfully created!')->autoDismiss(3);
-
-        return to_route('admin.cities.index');
+        
     }
 
     /**
@@ -79,5 +76,26 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function registerSeeker(){
+        $user_type = [
+            'employer' => 'employer',
+            'seeker' => 'seeker',
+        ];
+        return view('user.seeker-register',[
+            'user_type'=> $user_type,
+        ]); 
+    }
+    public function registerEmployer(){
+        $user_type = [
+            'employer' => 'employer',
+            'seeker' => 'seeker',
+        ];
+        return view('user.employer-register',[
+            'user_type'=> $user_type,
+        ]); 
+    }
+    public function verify(){
+        return view('auth.verify-email');
     }
 }

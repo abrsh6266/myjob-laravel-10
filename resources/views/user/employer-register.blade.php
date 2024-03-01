@@ -2,23 +2,28 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
-                <h1>Looking for a job</h1>
+                <h1>Looking for an employee?</h1>
                 <h3>Please create an account</h3>
                 <img src="{{ asset('/image/register.png') }}" alt="">
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Register</div>
+                    <div class="card-header">Employer Registation</div>
                     <div class="card-body">
-                        <x-splade-form action="{{ route('register') }}" class="space-y-4 ">
-                            <x-splade-input id="name" type="text" name="name" :label="__('Name')" required
+                        <x-splade-form action="{{ route('register') }}" class="space-y-4" :default="[
+                            'name' => '',
+                            'password' => '',
+                            'email' => '',
+                            'user_type' => 'employer',
+                        ]">
+                            <x-splade-input id="name" type="text" name="name" :label="__('Company Name')" required
                                 autofocus />
                             <x-splade-input id="email" type="email" name="email" :label="__('Email')" required />
                             <x-splade-input id="password" type="password" name="password" :label="__('Password')" required
                                 autocomplete="new-password" />
                             <x-splade-input id="password_confirmation" type="password" name="password_confirmation"
                                 :label="__('Confirm Password')" required />
-
+                            <x-splade-input name="user_type"  disabled/>
                             <div class="flex items-center justify-end">
                                 <Link class="underline text-sm text-gray-600 hover:text-gray-900"
                                     href="{{ route('login') }}">
