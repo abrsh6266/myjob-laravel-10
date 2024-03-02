@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class isEmployer
+class isPremiumUser
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,6 @@ class isEmployer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user()->hasRole("employer")){
-            return $next($request);
-        }else{
-            abort(401);
-        }
+        return $next($request);
     }
 }

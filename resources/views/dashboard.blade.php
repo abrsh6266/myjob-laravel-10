@@ -5,6 +5,12 @@
         </h2>
     </x-slot>
     <div class="container mx-auto mt-20">
+        @if (Session::has('success'))
+        <div class="alert alert-success">{{Session::get('success')}}</div>
+        @endif
+        @if (Session::has('error'))
+            <div class="alert alert-danger">{{Session::get('error')}}</div>
+        @endif
         @auth
             <div class="flex justify-center">
                 <div class="text-xl font-bold mr-6">Hello, {{ auth()->user()->name }}</div>
