@@ -15,6 +15,9 @@ class doNotAllowPayment
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if($request->user()->billing_ends > date('Y-m-d')){
+            return redirect(route('dashboard'))->with('error','you are paid member ');
+        }
         return $next($request);
     }
 }
