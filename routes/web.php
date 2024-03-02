@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\PostJobController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\isEmployer;
+use App\Http\Middleware\isPremiumUser;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +51,7 @@ Route::middleware('splade')->group(function () {
         Route::get('/pay/yearly',[SubscriptionController::class,'initiatePayment'])->name('pay.yearly');
         Route::get('/payment/success',[SubscriptionController::class,'paymentSuccessful'])->name('payment.success');
         Route::get('/payment/cancel',[SubscriptionController::class,'cancel'])->name('payment.cancel');
+        Route::get('/job/create',[PostJobController::class,'create'])->name('job.create')->middleware(isPremiumUser::class);
 
     });
     require __DIR__.'/auth.php';

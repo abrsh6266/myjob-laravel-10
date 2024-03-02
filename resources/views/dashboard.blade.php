@@ -17,9 +17,14 @@
 
 
             </div>
-            @if (auth()->user()->hasRole('employer'))
+            @if (auth()->user()->hasRole('employer') && !auth()->user()->billing_ends)
                 <div class="text-xl font-bold">
                     <p> Your trial will {{now()->format('Y-m-d')> auth()->user()->user_trial? 'was expired': 'will expire'}} {{ auth()->user()->user_trial }}</p>
+                </div>
+            @endif
+            @if (auth()->user()->hasRole('employer') && auth()->user()->billing_ends)
+                <div class="text-xl font-bold">
+                    <p> Your membership {{now()->format('Y-m-d')> auth()->user()->billing_ends? 'was expired': 'will expire'}} {{ auth()->user()->billing_ends }}</p>
                 </div>
             @endif
         @endauth

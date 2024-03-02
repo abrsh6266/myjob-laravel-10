@@ -1,6 +1,11 @@
 <x-app-layout>
     <div class="container mt-5">
-        <div class="row">
+        <div class="row justify-content-center">
+            @if (Session::has('message'))
+            <div class="alert alert-warning">
+                {{Session::get('message')}}    
+            </div>                
+            @endif
             <div class="col-md-4">
                 <div class="max-w-sm rounded overflow-hidden shadow-lg">
                     <div class="px-6 py-4">

@@ -28,6 +28,14 @@
                     class="text-lg text-gray-700 dark:text-gray-500 underline">
                     Home
                 </x-nav-link>
+                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
+                    class="text-lg text-gray-700 dark:text-gray-500 underline">
+                    Dashboard
+                </x-nav-link>
+                <x-nav-link :href="route('subscribe')" :active="request()->routeIs('subscribe')"
+                    class="text-lg text-gray-700 dark:text-gray-500 underline">
+                    Subscribe
+                </x-nav-link>
 
                 @auth
                     <x-dropdown placement="bottom-end">

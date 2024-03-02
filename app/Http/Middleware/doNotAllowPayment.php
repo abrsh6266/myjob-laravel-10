@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class isPremiumUser
+class doNotAllowPayment
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,6 @@ class isPremiumUser
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->user_trial> date('Y-m-d') || $request->user()->billing_ends> date('Y-m-d')) {
-            return $next($request);
-        }
-        return redirect()->route('subscribe')->with('message','please subscribe to post  a job');
+        return $next($request);
     }
 }
