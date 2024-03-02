@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -41,8 +42,10 @@ Route::middleware('splade')->group(function () {
         Route::resource('/users', UserController::class);
         Route::get('/register/seeker',[UserController::class,'registerSeeker'])->name('seeker');
         Route::get('/register/employer',[UserController::class,'registerEmployer'])->name('employer'); 
+        Route::get('/subscribe',[SubscriptionController::class,'subscription'])->middleware('auth');
+        Route::get('/pay/weekly',[SubscriptionController::class,'initiatePayment'])->name('pay.weekly')->middleware('auth');
+        Route::get('/pay/monthly',[SubscriptionController::class,'initiatePayment'])->name('pay.monthly')->middleware('auth');
+        Route::get('/pay/yearly',[SubscriptionController::class,'initiatePayment'])->name('pay.yearly')->middleware('auth');
     });
     require __DIR__.'/auth.php';
 });
-Route::get('/verify', [UserController::class,'verify'])->name('[verification.notice');
-
