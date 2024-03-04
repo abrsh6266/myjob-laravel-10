@@ -53,4 +53,9 @@ class PostJobController extends Controller
             'jobs'=> Listing::where('user_id',auth()->user()->id    )->get(),
         ]);
     }
+    public function destroy($id){
+        Listing::find($id)->delete();
+
+        return back()->with('success','job deleted Successfully!');
+    }
 }

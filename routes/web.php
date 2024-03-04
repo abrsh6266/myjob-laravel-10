@@ -58,9 +58,9 @@ Route::middleware([])->group(function () {
     Route::middleware(['auth'])->group(function () {
         Route::get('/job/create',[PostJobController::class,'create'])->name('job.create')->middleware(isPremiumUser::class);
         Route::post('/job/store',[PostJobController::class,'store'])->name('job.store')->middleware(isPremiumUser::class);
-        Route::get('job/{listing}/edit',[PostJobController::class,'edit'])->name('job.edit')->middleware(isPremiumUser::class);
-        Route::put('job/{id}/edit',[PostJobController::class,'update'])->name('job.update')->middleware(isPremiumUser::class);
-        Route::get('job',[PostJobController::class,'index'])->name('job.index')->middleware(isPremiumUser::class);
-
+        Route::get('job/{listing}/edit',[PostJobController::class,'edit'])->name('job.edit');
+        Route::put('job/{id}/edit',[PostJobController::class,'update'])->name('job.update');
+        Route::get('job',[PostJobController::class,'index'])->name('job.index');
+        Route::delete('job/{id}/delete',[PostJobController::class,'destroy'])->name('job.delete');
     });
 });
