@@ -55,8 +55,8 @@ Route::middleware([])->group(function () {
         Route::get('/payment/cancel',[SubscriptionController::class,'cancel'])->name('payment.cancel');
         require __DIR__.'/auth.php';
     });
-    Route::middleware(['splade'])->group(function () {
+    Route::middleware([])->group(function () {
         Route::get('/job/create',[PostJobController::class,'create'])->name('job.create')->middleware(isPremiumUser::class);
+        Route::post('/job/store',[PostJobController::class,'store'])->name('job.store')->middleware(isPremiumUser::class);
     });
-    
 });
