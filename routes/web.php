@@ -53,7 +53,10 @@ Route::middleware([])->group(function () {
         Route::get('/pay/yearly',[SubscriptionController::class,'initiatePayment'])->name('pay.yearly');
         Route::get('/payment/success',[SubscriptionController::class,'paymentSuccessful'])->name('payment.success');
         Route::get('/payment/cancel',[SubscriptionController::class,'cancel'])->name('payment.cancel');
-        Route::get('/job/create',[PostJobController::class,'create'])->name('job.create')->middleware(isPremiumUser::class);
         require __DIR__.'/auth.php';
     });
+    Route::middleware([])->group(function () {
+        Route::get('/job/create',[PostJobController::class,'create'])->name('job.create')->middleware(isPremiumUser::class);
+    });
+    
 });
