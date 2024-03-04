@@ -32,8 +32,8 @@
                             <tr>
                                 <td>{{$job->title}}</td>
                                 <td>{{$job->created_at->format('Y-m-d')}}</td>
-                                <td><button class="btn btn-danger">Edit</button></td>
-                                <td>Delete</td>
+                                <td><button class="btn btn-success"><a style="color: white;" href="{{route('job.edit',$job->id)}}">Edit</a></button></td>
+                                <td><button class="btn btn-danger"><a style="color: white;" href="{{route('job.edit',$job->id)}}">Delete</a></button></td>
                             </tr>
                         </tbody>
                     </table>
