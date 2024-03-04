@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('splade')->group(function () {
+Route::middleware([])->group(function () {
     // Registers routes to support the interactive components...
     Route::spladeWithVueBridge();
 
@@ -42,7 +42,8 @@ Route::middleware('splade')->group(function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
-    Route::middleware([])->group(function () {
+    
+    Route::middleware(['splade'])->group(function () {
         Route::resource('/users', UserController::class);
         Route::get('/register/seeker',[UserController::class,'registerSeeker'])->name('seeker');
         Route::get('/register/employer',[UserController::class,'registerEmployer'])->name('employer'); 
@@ -53,7 +54,6 @@ Route::middleware('splade')->group(function () {
         Route::get('/payment/success',[SubscriptionController::class,'paymentSuccessful'])->name('payment.success');
         Route::get('/payment/cancel',[SubscriptionController::class,'cancel'])->name('payment.cancel');
         Route::get('/job/create',[PostJobController::class,'create'])->name('job.create')->middleware(isPremiumUser::class);
-
+        require __DIR__.'/auth.php';
     });
-    require __DIR__.'/auth.php';
 });

@@ -19,9 +19,9 @@
                             <li class="list-group-item">A third item</li>
                         </ul>
                         <div class="card-body text-center">
-                            <x-nav-link :href="route('pay.weekly')" class="card-link">
+                            <a href="{{route('pay.weekly')}}" class="card-link">
                                 <button class="btn btn-success">Pay</button>
-                            </x-nav-link>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -39,9 +39,9 @@
                             <li class="list-group-item">A third item</li>
                         </ul>
                         <div class="card-body text-center">
-                            <x-nav-link :href="route('pay.monthly')" class="card-link">
+                            <a href="{{route('pay.monthly')}}" class="card-link">
                                 <button class="btn btn-success">Pay</button>
-                            </x-nav-link>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -59,9 +59,9 @@
                             <li class="list-group-item">A third item</li>
                         </ul>
                         <div class="card-body text-center">
-                            <x-nav-link :href="route('pay.yearly')" class="card-link">
+                            <a href="{{route('pay.yearly')}}" class="card-link">
                                 <button class="btn btn-success">Pay</button>
-                            </x-nav-link>
+                            </a>
                         </div>
                     </div>
                 </div>
