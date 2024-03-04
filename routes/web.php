@@ -58,5 +58,6 @@ Route::middleware([])->group(function () {
     Route::middleware([])->group(function () {
         Route::get('/job/create',[PostJobController::class,'create'])->name('job.create')->middleware(isPremiumUser::class);
         Route::post('/job/store',[PostJobController::class,'store'])->name('job.store')->middleware(isPremiumUser::class);
+        Route::get('job/{listing}/edit',[PostJobController::class,'edit'])->name('job.edit')->middleware(isPremiumUser::class);
     });
 });

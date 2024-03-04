@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobPostFormRequest;
 use App\Models\Listing;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,18 +16,8 @@ class PostJobController extends Controller
     {
         return view('job.create');
     }
-    public function store(Request $request)
+    public function store(JobPostFormRequest $request)
     {
-        $this->validate($request, [
-            'title' => 'required|min:5',
-            'feature_image' => 'required|mimes:png,jpg,jpeg|max:2048',
-            'description' => 'required|min:10',
-            'roles' => 'required|min:10',
-            'job_type' => 'required',
-            'address' => 'required',
-            'date' => 'required',
-            'salary' => 'required',
-        ]);
 
         $imagePath = $request->file('feature_image')->store('images', 'public');
         $post = new Listing;
@@ -42,5 +33,8 @@ class PostJobController extends Controller
         $post->salary = $request->salary;
         $post->save();
         return back();
+    }
+    public function edit(Listing $listing){
+        return view('job.edit', compact('listing'));
     }
 }
