@@ -8,31 +8,35 @@
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Employer Registation</div>
+                    <div class="card-header">Employer Registration</div>
                     <div class="card-body">
-                        <x-splade-form action="{{ route('register') }}" class="space-y-4" :default="[
-                            'name' => '',
-                            'password' => '',
-                            'email' => '',
-                            'user_type' => 'employer',
-                        ]">
-                            <x-splade-input id="name" type="text" name="name" :label="__('Company Name')" required
-                                autofocus />
-                            <x-splade-input id="email" type="email" name="email" :label="__('Email')" required />
-                            <x-splade-input id="password" type="password" name="password" :label="__('Password')" required
-                                autocomplete="new-password" />
-                            <x-splade-input id="password_confirmation" type="password" name="password_confirmation"
-                                :label="__('Confirm Password')" required />
-                            <x-splade-input name="user_type"  disabled/>
-                            <div class="flex items-center justify-end">
-                                <Link class="underline text-sm text-gray-600 hover:text-gray-900"
-                                    href="{{ route('login') }}">
-                                {{ __('Already registered?') }}
-                                </Link>
-
-                                <x-splade-submit class="ml-4" :label="__('Register')" />
+                        <form method="POST" action="{{ route('register') }}" class="space-y-4">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Company Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required
+                                    autofocus>
                             </div>
-                        </x-splade-form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required
+                                    autocomplete="new-password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="password_confirmation"
+                                    name="password_confirmation" required>
+                            </div>
+                            <input type="hidden" name="user_type" value="employer">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{{ route('login') }}" class="text-decoration-none">Already registered?</a>
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

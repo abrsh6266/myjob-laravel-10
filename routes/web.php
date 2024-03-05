@@ -43,7 +43,7 @@ Route::middleware([])->group(function () {
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
     
-    Route::middleware(['splade'])->group(function () {
+    Route::middleware([])->group(function () {
         Route::resource('/users', UserController::class);
         Route::get('/register/seeker',[UserController::class,'registerSeeker'])->name('seeker');
         Route::get('/register/employer',[UserController::class,'registerEmployer'])->name('employer'); 
