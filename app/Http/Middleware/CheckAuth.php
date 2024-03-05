@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,13 @@ class CheckAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if (!auth()->check()) {
+            return $next($request);
+        } else {
+            if (auth()->user()->hasRole("employer")) {
+                return redirect()->intended(RouteServiceProvider::HOME);;
+            }
+            return redirect()->intended('home');
+        }
     }
 }

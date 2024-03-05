@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         if(auth()->user()->hasRole('employer')){
             return redirect()->intended(RouteServiceProvider::HOME);
         }
-        return redirect()->intended('profile');
+        return redirect()->intended('home');
     }
 
     /**

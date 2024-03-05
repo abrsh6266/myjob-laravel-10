@@ -4,6 +4,7 @@ use App\Http\Controllers\PostJobController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\CheckAuth;
 use App\Http\Middleware\doNotAllowPayment;
 use App\Http\Middleware\isEmployer;
 use App\Http\Middleware\isPremiumUser;
@@ -37,16 +38,24 @@ Route::middleware([])->group(function () {
         Route::get('/', function () {
             return view('dashboard');
         })->name('dashboard')->middleware([isPremiumUser::class]);
+        Route::get('/home', function () {
+            return view('home');
+        })->name('home');
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit')->middleware(isPremiumUser::class);
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        //seeker profile
+
+        Route::get('/profile/seeker', [ProfileController::class, 'editSeeker'])->name('seeker.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
     
     Route::middleware([])->group(function () {
         Route::resource('/users', UserController::class);
-        Route::get('/register/seeker',[UserController::class,'registerSeeker'])->name('seeker');
-        Route::get('/register/employer',[UserController::class,'registerEmployer'])->name('employer'); 
+        Route::get('/register/seeker',[UserController::class,'registerSeeker'])->name('seeker')->middleware([CheckAuth::class]);
+        Route::get('/register/employer',[UserController::class,'registerEmployer'])->name('employer')->middleware([CheckAuth::class]); 
         Route::get('/subscribe',[SubscriptionController::class,'subscription'])->name('subscribe');
         Route::get('/pay/weekly',[SubscriptionController::class,'initiatePayment'])->name('pay.weekly');
         Route::get('/pay/monthly',[SubscriptionController::class,'initiatePayment'])->name('pay.monthly');

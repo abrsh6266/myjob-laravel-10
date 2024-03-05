@@ -21,7 +21,12 @@ class ProfileController extends Controller
             'user' => $request->user(),
         ]);
     }
-
+    public function editSeeker(Request $request)
+    {
+        return view('seeker.edit', [
+            'user' => $request->user(),
+        ]);
+    }
     /**
      * Update the user's profile information.
      *
@@ -41,7 +46,7 @@ class ProfileController extends Controller
 
         User::find(auth()->user()->id)->update($request->except('profile_pic'));
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return back()->with('status', 'profile-updated');
     }
 
     /**
