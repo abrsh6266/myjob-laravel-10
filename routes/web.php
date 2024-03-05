@@ -36,7 +36,7 @@ Route::middleware([])->group(function () {
        Route::middleware(['verified'])->group(function () {
         Route::get('/', function () {
             return view('dashboard');
-        })->name('dashboard');
+        })->name('dashboard')->middleware([isPremiumUser::class]);
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

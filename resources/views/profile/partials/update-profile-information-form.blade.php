@@ -9,9 +9,17 @@
         </p>
     </header>
 
-    <form method="POST" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="mt-6 space-y-6">
         @csrf
         @method('PATCH')
+        <!-- Profile Picture -->
+        <div class="mb-3">
+            @if (auth()->user()->profile_pic)
+            <img src="{{Storage::url(auth()->user()->profile_pic)}}" width="150" class="mt-3">                
+            @endif
+            <label for="logo">Logo</label>
+            <input type="file" class="form-control" name="profile_pic">
+        </div>
         <!-- Name -->
         <div class="mb-3">
             <label for="name" class="form-label">{{ __('Name') }}</label>
