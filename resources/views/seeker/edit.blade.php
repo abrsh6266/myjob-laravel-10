@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 mt-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
