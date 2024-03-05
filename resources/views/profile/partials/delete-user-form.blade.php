@@ -9,14 +9,17 @@
         </p>
     </header>
 
-     <x-splade-form
-        method="delete"
-        :action="route('profile.destroy')"
-        :confirm="__('Are you sure you want to delete your account?')"
-        :confirm-text="__('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.')"
-        :confirm-button="__('Delete Account')"
-        require-password
-    >
-        <x-splade-submit danger :label="__('Delete Account')" />
-    </x-splade-form>
+    <form method="POST" action="{{ route('profile.destroy') }}" class="space-y-4" onsubmit="return confirm('{{ __('Are you sure you want to delete your account?') }}')">
+        @csrf
+        @method('DELETE')
+        <!-- Password Confirmation -->
+        <div class="mb-3">
+            <label for="password" class="form-label">{{ __('Confirm Password') }}</label>
+            <input id="password" type="password" name="password" class="form-control" required>
+        </div>
+        <!-- Confirm Delete Button -->
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-danger">{{ __('Delete Account') }}</button>
+        </div>
+    </form>
 </section>

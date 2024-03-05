@@ -6,22 +6,31 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl" dusk="update-profile-information">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="space-y-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="text-lg font-semibold text-gray-800 mb-4">
+                                    {{ __('Update Profile Information') }}
+                                </h2>
+                                @include('profile.partials.update-profile-information-form')
+                            </div>
+                        </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl" dusk="update-password">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
+                        <div class="card">
+                            <div class="card-body">
+                                @include('profile.partials.update-password-form')
+                            </div>
+                        </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl" dusk="delete-user">
-                    @include('profile.partials.delete-user-form')
+                        <div class="card">
+                            <div class="card-body">
+                                @include('profile.partials.delete-user-form')
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

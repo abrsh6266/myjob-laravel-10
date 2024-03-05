@@ -15,7 +15,7 @@
           <i class="fas fa-user fa-fw"></i>
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="">Settings</a></li>
+          <li><a class="dropdown-item" href="{{route('profile.edit')}}">Profile</a></li>
           <li><a class="dropdown-item" href="{{ route('subscribe') }}">Subscription</a></li>
           <li><hr class="dropdown-divider" /></li>
           <li>

@@ -9,17 +9,30 @@
         </p>
     </header>
 
-    <x-splade-form method="put" :action="route('password.update')" class="mt-6 space-y-6" preserve-scroll>
-        <x-splade-input id="current_password" name="current_password" type="password" :label="__('Current Password')" autocomplete="current-password" />
-        <x-splade-input id="password" name="password" type="password" :label="__('New Password')" autocomplete="new-password" />
-        <x-splade-input id="password_confirmation" name="password_confirmation" type="password" :label="__('Confirm Password')" autocomplete="new-password" />
-
-        <div class="flex items-center gap-4">
-            <x-splade-submit :label="__('Save')" />
-
+    <form method="POST" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+        @csrf
+        @method('PUT')
+        <!-- Current Password -->
+        <div class="mb-3">
+            <label for="current_password" class="form-label">{{ __('Current Password') }}</label>
+            <input id="current_password" name="current_password" type="password" class="form-control" autocomplete="current-password">
+        </div>
+        <!-- New Password -->
+        <div class="mb-3">
+            <label for="password" class="form-label">{{ __('New Password') }}</label>
+            <input id="password" name="password" type="password" class="form-control" autocomplete="new-password">
+        </div>
+        <!-- Confirm Password -->
+        <div class="mb-3">
+            <label for="password_confirmation" class="form-label">{{ __('Confirm Password') }}</label>
+            <input id="password_confirmation" name="password_confirmation" type="password" class="form-control" autocomplete="new-password">
+        </div>
+        <!-- Submit Button -->
+        <div class="d-flex align-items-center gap-4">
+            <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
             @if (session('status') === 'password-updated')
                 <p class="text-sm text-gray-600">{{ __('Saved.') }}</p>
             @endif
         </div>
-    </x-splade-form>
+    </form>
 </section>
