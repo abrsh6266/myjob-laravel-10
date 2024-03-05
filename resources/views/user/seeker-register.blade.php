@@ -10,29 +10,35 @@
                 <div class="card">
                     <div class="card-header">Register</div>
                     <div class="card-body">
-                        <x-splade-form :default="[
-                            'name' => '',
-                            'password' => '',
-                            'email' => '',
-                            'user_type' => 'seeker',
-                        ]" action="{{ route('register') }}" class="space-y-4 ">
-                            <x-splade-input id="name" type="text" name="name" :label="__('Name')" required
-                                autofocus />
-                            <x-splade-input id="email" type="email" name="email" :label="__('Email')" required />
-                            <x-splade-input id="password" type="password" name="password" :label="__('Password')" required
-                                autocomplete="new-password" />
-                            <x-splade-input id="password_confirmation" type="password" name="password_confirmation"
-                                :label="__('Confirm Password')" required />
-                            <x-splade-input disabled name="user_type"/>
-                            <div class="flex items-center justify-end">
-                                <Link class="underline text-sm text-gray-600 hover:text-gray-900"
-                                    href="{{ route('login') }}">
-                                {{ __('Already registered?') }}
-                                </Link>
-
-                                <x-splade-submit class="ml-4" :label="__('Register')" />
+                        <form method="POST" action="{{ route('register') }}" class="space-y-4">
+                            @csrf
+                            <!-- Name -->
+                            <div class="mb-3">
+                                <label for="name" class="form-label">{{ __('Name') }}</label>
+                                <input id="name" type="text" name="name" class="form-control" required autofocus>
                             </div>
-                        </x-splade-form>
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">{{ __('Email') }}</label>
+                                <input id="email" type="email" name="email" class="form-control" required>
+                            </div>
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label">{{ __('Password') }}</label>
+                                <input id="password" type="password" name="password" class="form-control" required autocomplete="new-password">
+                            </div>
+                            <!-- Confirm Password -->
+                            <div class="mb-3">
+                                <label for="password_confirmation" class="form-label">{{ __('Confirm Password') }}</label>
+                                <input id="password_confirmation" type="password" name="password_confirmation" class="form-control" required>
+                            </div>
+                            <!-- User Type -->
+                            <input type="hidden" name="user_type" value="seeker">
+                            <div class="d-flex justify-content-end align-items-center">
+                                <a href="{{ route('login') }}" class="text-decoration-none text-gray-600">Already registered?</a>
+                                <button type="submit" class="btn btn-primary ml-4">{{ __('Register') }}</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
