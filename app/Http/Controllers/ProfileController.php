@@ -54,6 +54,13 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
+    public function updateResume(ProfileUpdateRequest $request){
+        if ($request->hasFile('resume')) {
+            $filePath = $request->file('resume')->store('resume', 'public');
+            User::find(auth()->user()->id)->update(['resume' => $filePath]);
+        }
+        return back()->with('status', 'resume-updated');
+    }
     public function destroy(Request $request)
     {
         $request->validateWithBag('userDeletion', [

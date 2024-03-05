@@ -48,7 +48,7 @@ Route::middleware([])->group(function () {
         //seeker profile
 
         Route::get('/profile/seeker', [ProfileController::class, 'editSeeker'])->name('seeker.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::put('/resume', [ProfileController::class, 'updateResume'])->name('resume.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
     

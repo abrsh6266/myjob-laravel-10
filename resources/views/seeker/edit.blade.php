@@ -15,19 +15,23 @@
                                 <h2 class="text-lg font-semibold text-gray-800 mb-4">
                                     {{ __('Update Profile Information') }}
                                 </h2>
-                                @include('profile.partials.update-profile-information-form')
+                                @include('seeker.partials.update-profile-information-form')
                             </div>
                         </div>
 
                         <div class="card">
                             <div class="card-body">
-                                @include('profile.partials.update-password-form')
+                                @include('seeker.partials.update-password-form')
                             </div>
                         </div>
-
                         <div class="card">
                             <div class="card-body">
-                                @include('profile.partials.delete-user-form')
+                                @include('seeker.partials.update-user-resume')
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                @include('seeker.partials.delete-user-form')
                             </div>
                         </div>
                     </div>
