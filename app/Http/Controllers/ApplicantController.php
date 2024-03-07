@@ -14,7 +14,7 @@ class ApplicantController extends Controller
         //dd($listings);
         // $records = DB::table("listing_user")->whereIn('listing_id',$listings->pluck('id'))->get();
         // dd($records);
-        return view("applicant.index");
+        return view("applicants.index", compact("listings"));
 
     }
 }
