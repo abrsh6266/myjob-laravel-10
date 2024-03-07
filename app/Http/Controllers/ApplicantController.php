@@ -10,7 +10,7 @@ class ApplicantController extends Controller
 {
     public function index()
     {
-        $listings = Listing::withCount('users')->where("user_id", auth()->user()->id)->get();
+        $listings = Listing::withCount('users')->latest()->where("user_id", auth()->user()->id)->get();
         //dd($listings);
         // $records = DB::table("listing_user")->whereIn('listing_id',$listings->pluck('id'))->get();
         // dd($records);
