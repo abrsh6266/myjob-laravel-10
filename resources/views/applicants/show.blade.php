@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-auto align-self-center">
                         <form action="#" method="post">
-                            <a href="#" class="btn btn-primary" target="_blank">Download Resume</a>
+                            <a href="{{Storge::url($user->resume)}}" class="btn btn-primary" target="_blank">Download Resume</a>
                             <button type="submit" class="">
                                 Shortlist
                             </button>
