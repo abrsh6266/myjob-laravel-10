@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\PostJobController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
@@ -71,5 +72,9 @@ Route::middleware([])->group(function () {
         Route::put('job/{id}/edit',[PostJobController::class,'update'])->name('job.update');
         Route::get('job',[PostJobController::class,'index'])->name('job.index');
         Route::delete('job/{id}/delete',[PostJobController::class,'destroy'])->name('job.delete');
+    });
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/applicants',[ApplicantController::class,'index'])->name('applicants.index');
     });
 });
