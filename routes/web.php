@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\JObListingController;
 use App\Http\Controllers\PostJobController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
@@ -41,20 +42,18 @@ Route::middleware([])->group(function () {
             return view('dashboard');
         })->name('dashboard')->middleware([isEmployer::class]);
 
-        Route::get('/home', function () {
-            return view('home');
-        })->name('home')->middleware([isSeeker::class]);
-
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit')->middleware(isEmployer::class);
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-        //seeker profile
-
-        Route::get('/profile/seeker', [ProfileController::class, 'editSeeker'])->name('seeker.edit');
-        Route::put('/resume', [ProfileController::class, 'updateResume'])->name('resume.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        Route::get('/home', [JObListingController::class, 'index'])->name('home')->middleware([isSeeker::class]);
     });
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit')->middleware(isEmployer::class);
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //seeker profile
+
+    Route::get('/profile/seeker', [ProfileController::class, 'editSeeker'])->name('seeker.edit');
+    Route::put('/resume', [ProfileController::class, 'updateResume'])->name('resume.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::middleware([])->group(function () {
         Route::resource('/users', UserController::class);
