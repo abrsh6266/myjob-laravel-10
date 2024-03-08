@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 @auth
-                    
+
                     <li class="nav-item">
                         <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
                             Home
@@ -30,7 +30,12 @@
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ Auth::user()->name }}
+                            @if (Auth::user()->profile_pic)
+                                <img src="{{ Storage::url(Auth::user()->profile_pic) }}" width="40"
+                                    class="rounded-circle" alt="">
+                            @else
+                                {{ Auth::user()->name }}
+                            @endif
                         </a>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <form method="POST" action="{{ route('logout') }}">
@@ -41,14 +46,17 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <a href="{{ route('login') }}" class="nav-link {{ request()->routeIs('login') ? 'active' : '' }}">Log in</a>
+                        <a href="{{ route('login') }}"
+                            class="nav-link {{ request()->routeIs('login') ? 'active' : '' }}">Log in</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a href="{{ route('seeker') }}" class="nav-link {{ request()->routeIs('seeker') ? 'active' : '' }}">Job Seeker</a>
+                            <a href="{{ route('seeker') }}"
+                                class="nav-link {{ request()->routeIs('seeker') ? 'active' : '' }}">Job Seeker</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('employer') }}" class="nav-link {{ request()->routeIs('employer') ? 'active' : '' }}">Employer</a>
+                            <a href="{{ route('employer') }}"
+                                class="nav-link {{ request()->routeIs('employer') ? 'active' : '' }}">Employer</a>
                         </li>
                     @endif
                 @endauth

@@ -7,13 +7,21 @@
     <div class="container mx-auto mt-5">
         <div class="d-flex justify-content-between">
             <h4>Recommended Jobs</h4>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Salary
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                </ul>
+              </div>
             <button class="btn btn-dark">view</button>
         </div>
         <div class="row mt-2 g 1">
             @foreach ($jobs as $job)
                 <div class="col-md-3">
                     <div class="card p-2">
-                        <div class="text-right"><small>{{ $job->job_type }}</small></div>
+                        <div class="text-right"><small class="badge text-bg-info">{{ $job->job_type }}</small></div>
                         <div class="text-center mt-2 p-3">
                             <img src="{{Storage::url($job->profile->profile_pic)}}" width="100" class="rounded-circle" alt="">
                             <br><span class="d-black font-weight-bold">{{ $job->title }}</span>

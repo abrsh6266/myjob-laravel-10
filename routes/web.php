@@ -4,9 +4,9 @@ use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\JObListingController;
 use App\Http\Controllers\PostJobController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\CheckAuth;
 use App\Http\Middleware\doNotAllowPayment;
 use App\Http\Middleware\isEmployer;
@@ -49,17 +49,25 @@ Route::middleware([])->group(function () {
 
         });
     });
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/job/create', [PostJobController::class, 'create'])->name('job.create')->middleware(isPremiumUser::class);
+        Route::post('/job/store', [PostJobController::class, 'store'])->name('job.store')->middleware(isPremiumUser::class);
+        Route::get('job/{listing}/edit', [PostJobController::class, 'edit'])->name('job.edit');
+        Route::put('job/{id}/edit', [PostJobController::class, 'update'])->name('job.update');
+        Route::get('job', [PostJobController::class, 'index'])->name('job.index');
+        Route::delete('job/{id}/delete', [PostJobController::class, 'destroy'])->name('job.delete');
+    });
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit')->middleware(isEmployer::class);
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit')->middleware(isEmployer::class);
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    //seeker profile
+        //seeker profile
 
-    Route::get('/profile/seeker', [ProfileController::class, 'editSeeker'])->name('seeker.edit');
-    Route::put('/resume', [ProfileController::class, 'updateResume'])->name('resume.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+        Route::get('/profile/seeker', [ProfileController::class, 'editSeeker'])->name('seeker.edit');
+        Route::put('/resume', [ProfileController::class, 'updateResume'])->name('resume.update');
+    });
     Route::middleware([])->group(function () {
         Route::resource('/users', UserController::class);
         Route::get('/register/seeker', [UserController::class, 'registerSeeker'])->name('seeker')->middleware([CheckAuth::class]);
@@ -72,19 +80,11 @@ Route::middleware([])->group(function () {
         Route::get('/payment/cancel', [SubscriptionController::class, 'cancel'])->name('payment.cancel');
         require __DIR__ . '/auth.php';
     });
-    Route::middleware(['auth'])->group(function () {
-        Route::get('/job/create', [PostJobController::class, 'create'])->name('job.create')->middleware(isPremiumUser::class);
-        Route::post('/job/store', [PostJobController::class, 'store'])->name('job.store')->middleware(isPremiumUser::class);
-        Route::get('job/{listing}/edit', [PostJobController::class, 'edit'])->name('job.edit');
-        Route::put('job/{id}/edit', [PostJobController::class, 'update'])->name('job.update');
-        Route::get('job', [PostJobController::class, 'index'])->name('job.index');
-        Route::delete('job/{id}/delete', [PostJobController::class, 'destroy'])->name('job.delete');
-    });
-
+    
     Route::middleware(['auth'])->group(function () {
         Route::get('/applicants', [ApplicantController::class, 'index'])->name('applicants.index');
         Route::get('/applicants/{listing:slug}', [ApplicantController::class, 'show'])->name('applicants.show');
         Route::post('shortlist/{listingId}/{userId}', [ApplicantController::class, 'shortlist'])->name('applicants.shortlist');
-        route::post('/application/{listingId}/submit', [ApplicantController::class,'apply'])->name('application.submit');
+        route::post('/application/{listingId}/submit', [ApplicantController::class, 'apply'])->name('application.submit');
     });
 });
