@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\JObListingController;
 use App\Http\Controllers\PostJobController;
 use App\Http\Controllers\SubscriptionController;
@@ -44,7 +45,7 @@ Route::middleware([])->group(function () {
         Route::middleware([isSeeker::class])->group(function () {
             Route::get('/home', [JObListingController::class, 'index'])->name('home');
             Route::get('/jobs/{listing:slug}', [JObListingController::class, 'show'])->name('job.show');
-            route::post('/resume/upload',[]);
+            route::post('/resume/upload', [FileUploadController::class, 'store']);
         });
     });
 

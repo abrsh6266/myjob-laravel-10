@@ -21,7 +21,7 @@
                             <a href="#" class="btn btn-primary mt-3">Apply Now</a>
                         @else
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
+                                 id="btnApply" data-bs-target="#exampleModal">
                                 Apply
                             </button>
                         @endif
@@ -52,12 +52,8 @@
         </div>
     </div>
     <script>
-        // Get a reference to the file input element
         const inputElement = document.querySelector('input[type="file"]');
-
-        // Create a FilePond instance
         const pond = FilePond.create(inputElement);
-
         pond.setOptions({
             server: {
                 url: '/resume/upload',
@@ -69,14 +65,16 @@
                     },
                     ondata: (formData) => {
                         formData.append('file', pond.getFiles()[0].file, pond.getFiles()[0].file.name)
+
                         return formData
                     },
                     onload: (response) => {
                         document.getElementById('btnApply').removeAttribute('disabled')
                     },
                     onerror: (response) => {
-                        console.log('error while aploading', response)
+                        console.log('error while uploading....', response)
                     },
+
                 },
             },
         });
