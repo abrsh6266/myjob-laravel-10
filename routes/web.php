@@ -41,8 +41,10 @@ Route::middleware([])->group(function () {
         Route::get('/', function () {
             return view('dashboard');
         })->name('dashboard')->middleware([isEmployer::class]);
-
-        Route::get('/home', [JObListingController::class, 'index'])->name('home')->middleware([isSeeker::class]);
+        Route::middleware([isSeeker::class])->group(function () {
+            Route::get('/home', [JObListingController::class, 'index'])->name('home');
+            Route::get('jobs/{listing:slug}', [JObListingController::class, 'show'])->name('job.show');
+        });
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit')->middleware(isEmployer::class);

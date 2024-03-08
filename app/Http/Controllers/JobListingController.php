@@ -11,4 +11,7 @@ class JObListingController extends Controller
         $jobs = Listing::with('profile')->get();
         return view("home", compact("jobs"));
     }
+    public function show(Listing $listing){
+        return view("show", compact("listing"));
+    }
 }
