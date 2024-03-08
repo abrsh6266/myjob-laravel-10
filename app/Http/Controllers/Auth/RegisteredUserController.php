@@ -52,5 +52,5 @@ class RegisteredUserController extends Controller
         Splade::toast('Your Account has been created!')->autoDismiss(3);
         event(new Registered($user));
         return redirect(RouteServiceProvider::HOME);
-    }
+    }   
 }

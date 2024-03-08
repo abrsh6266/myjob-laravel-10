@@ -46,6 +46,7 @@ Route::middleware([])->group(function () {
             Route::get('/home', [JObListingController::class, 'index'])->name('home');
             Route::get('/jobs/{listing:slug}', [JObListingController::class, 'show'])->name('job.show');
             route::post('/resume/upload', [FileUploadController::class, 'store']);
+
         });
     });
 
@@ -84,5 +85,6 @@ Route::middleware([])->group(function () {
         Route::get('/applicants', [ApplicantController::class, 'index'])->name('applicants.index');
         Route::get('/applicants/{listing:slug}', [ApplicantController::class, 'show'])->name('applicants.show');
         Route::post('shortlist/{listingId}/{userId}', [ApplicantController::class, 'shortlist'])->name('applicants.shortlist');
+        route::post('/application/{listingId}/submit', [ApplicantController::class,'apply'])->name('application.submit');
     });
 });
