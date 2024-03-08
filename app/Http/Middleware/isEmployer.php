@@ -18,7 +18,8 @@ class isEmployer
         if($request->user()->hasRole("employer")){
             return $next($request);
         }else{
-            abort(401);
+            
+            return redirect()->route('home');
         }
     }
 }

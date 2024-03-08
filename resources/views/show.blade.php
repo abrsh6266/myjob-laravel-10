@@ -7,6 +7,9 @@
                         style="height: 150px; object-fit: cover;">
                     <div class="card-body">
                         <h2 class="card-title">{{ $listing->title }}</h2>
+                        @if (Session::has('success'))
+                            <div class="alert alert-success">{{Session::get('success')}}</div>
+                        @endif
                         <span class="badge bg-primary">{{ $listing->job_type }}</span>
                         <p>Salary: ${{ number_format($listing->salary, 2) }} </p>
                         <p>Address: {{ $listing->address }} </p>
@@ -18,9 +21,11 @@
 
                         <p class="card-text mt-4">Application closing date: {{ $listing->application_close_date }}</p>
                         @if (auth()->user()->resume)
-                            <a href="#" class="btn btn-primary mt-3">Apply Now</a>
+                            <form action="{{ route('application.submit', [$listing->id]) }}" method="POST">@csrf
+                                <button class="btn btn-primary mt-3">Apply Now</button>
+                            </form>
                         @else
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="btnApply"
+                            <button type="button" class="btn btn-dark" data-bs-toggle="modal" id="btnApply"
                                 data-bs-target="#exampleModal">
                                 Apply
                             </button>
@@ -28,7 +33,7 @@
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
-                            <form action="{{route('application.submit',[$listing->id])}}" method="POST">@csrf
+                            <form action="{{ route('application.submit', [$listing->id]) }}" method="POST">@csrf
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -42,7 +47,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                            <button type="submit" class="btn btn-primary">Apply</button>
                                         </div>
                                     </div>
                                 </div>

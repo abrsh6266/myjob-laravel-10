@@ -14,19 +14,19 @@
         <!-- Navigation Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a href="{{ route('home') }}"
-                        class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
-                        Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('seeker.edit') }}"
-                        class="nav-link {{ request()->routeIs('seeker.edit') ? 'active' : '' }}">
-                        Profile
-                    </a>
-                </li>
                 @auth
+                    
+                    <li class="nav-item">
+                        <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('seeker.edit') }}"
+                            class="nav-link {{ request()->routeIs('seeker.edit') ? 'active' : '' }}">
+                            Profile
+                        </a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,14 +41,14 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <a href="{{ route('login') }}" class="nav-link">Log in</a>
+                        <a href="{{ route('login') }}" class="nav-link {{ request()->routeIs('login') ? 'active' : '' }}">Log in</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a href="{{ route('seeker') }}" class="nav-link">Job Seeker</a>
+                            <a href="{{ route('seeker') }}" class="nav-link {{ request()->routeIs('seeker') ? 'active' : '' }}">Job Seeker</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('employer') }}" class="nav-link">Employer</a>
+                            <a href="{{ route('employer') }}" class="nav-link {{ request()->routeIs('employer') ? 'active' : '' }}">Employer</a>
                         </li>
                     @endif
                 @endauth

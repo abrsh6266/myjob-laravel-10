@@ -18,7 +18,7 @@ class isSeeker
         if($request->user()->hasRole("seeker")){
             return $next($request);
         }else{
-            abort(401);
+            return redirect()->route('dashboard');
         }
     }
 }
