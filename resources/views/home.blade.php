@@ -33,10 +33,10 @@
                     Job Type
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{ route('home', ['job_type' => 'fulltime']) }}">Fulltime</a></li>
-                    <li><a class="dropdown-item" href="{{ route('home', ['job_type' => 'parttime']) }}">Parttime</a></li>
-                    <li><a class="dropdown-item" href="{{ route('home', ['job_type' => 'casual']) }}">Casual</a></li>
-                    <li><a class="dropdown-item" href="{{ route('home', ['job_type' => 'contract']) }}">Contract</a></li>
+                    <li><a class="dropdown-item" href="{{ route('home', ['job_type' => 'Fulltime']) }}">Fulltime</a></li>
+                    <li><a class="dropdown-item" href="{{ route('home', ['job_type' => 'Parttime']) }}">Parttime</a></li>
+                    <li><a class="dropdown-item" href="{{ route('home', ['job_type' => 'Casual']) }}">Casual</a></li>
+                    <li><a class="dropdown-item" href="{{ route('home', ['job_type' => 'Contract']) }}">Contract</a></li>
 
                 </ul>
             </div>
