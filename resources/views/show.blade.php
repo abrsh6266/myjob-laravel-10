@@ -8,20 +8,77 @@
                     <div class="card-body">
                         <h2 class="card-title">{{ $listing->title }}</h2>
                         <span class="badge bg-primary">{{ $listing->job_type }}</span>
-                        <p>Salary: ${{number_format($listing->salary,2)}} </p>
-                        <p>Address: {{$listing->address}} </p>
+                        <p>Salary: ${{ number_format($listing->salary, 2) }} </p>
+                        <p>Address: {{ $listing->address }} </p>
                         <h4 class="mt-4">Description</h4>
                         <p class="card-text">{!! $listing->description !!}</p>
 
                         <h4>Roles and Responsibilities</h4>
                         {!! $listing->roles !!}
 
-                        <p class="card-text mt-4">Application closing date: {{$listing->application_close_date}}</p>
-
-                        <a href="#" class="btn btn-primary mt-3">Apply Now</a>
+                        <p class="card-text mt-4">Application closing date: {{ $listing->application_close_date }}</p>
+                        @if ($listing->profile->resume)
+                            <a href="#" class="btn btn-primary mt-3">Apply Now</a>
+                        @else
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                Apply
+                            </button>
+                        @endif
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Upload resume</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="file">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        // Get a reference to the file input element
+        const inputElement = document.querySelector('input[type="file"]');
+
+        // Create a FilePond instance
+        const pond = FilePond.create(inputElement);
+
+        pond.setOptions({
+            server: {
+                url: '/resume/upload',
+                process: {
+                    method: 'POST',
+                    withCredentials: false,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    ondata: (formData) => {
+                        formData.append('file', pond.getFiles()[0].file, pond.getFiles()[0].file.name)
+                        return formData
+                    },
+                    onload: (response) => {
+                        document.getElementById('btnApply').removeAttribute('disabled')
+                    },
+                    onerror: (response) => {
+                        console.log('error while aploading', response)
+                    },
+                },
+            },
+        });
+    </script>
 </x-app-layout>

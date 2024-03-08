@@ -43,7 +43,8 @@ Route::middleware([])->group(function () {
         })->name('dashboard')->middleware([isEmployer::class]);
         Route::middleware([isSeeker::class])->group(function () {
             Route::get('/home', [JObListingController::class, 'index'])->name('home');
-            Route::get('jobs/{listing:slug}', [JObListingController::class, 'show'])->name('job.show');
+            Route::get('/jobs/{listing:slug}', [JObListingController::class, 'show'])->name('job.show');
+            route::post('/resume/upload',[]);
         });
     });
 
