@@ -17,34 +17,37 @@
                         {!! $listing->roles !!}
 
                         <p class="card-text mt-4">Application closing date: {{ $listing->application_close_date }}</p>
-                        @if ($listing->profile->resume)
+                        @if (auth()->user()->resume)
                             <a href="#" class="btn btn-primary mt-3">Apply Now</a>
                         @else
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                 id="btnApply" data-bs-target="#exampleModal">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="btnApply"
+                                data-bs-target="#exampleModal">
                                 Apply
                             </button>
                         @endif
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Upload resume</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <input type="file">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                            <form action="" method="POST">@csrf
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Upload resume</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="file">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
