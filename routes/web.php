@@ -57,6 +57,8 @@ Route::middleware([])->group(function () {
         Route::put('job/{id}/edit', [PostJobController::class, 'update'])->name('job.update');
         Route::get('job', [PostJobController::class, 'index'])->name('job.index');
         Route::delete('job/{id}/delete', [PostJobController::class, 'destroy'])->name('job.delete');
+        
+        Route::get('/job/applied', [ProfileController::class,'jobApplied'])->name('job.applied')->middleware('verified');
     });
 
     Route::middleware(['auth'])->group(function () {

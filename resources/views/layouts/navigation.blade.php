@@ -22,6 +22,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('job.applied') }}"
+                            class="nav-link {{ request()->routeIs('job.applied') ? 'active' : '' }}">
+                            Job Applied
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('seeker.edit') }}"
                             class="nav-link {{ request()->routeIs('seeker.edit') ? 'active' : '' }}">
                             Profile

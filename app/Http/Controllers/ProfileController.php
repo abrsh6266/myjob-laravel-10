@@ -48,13 +48,19 @@ class ProfileController extends Controller
 
         return back()->with('status', 'profile-updated');
     }
+    public function jobApplied()
+    {
+        $users =  User::with('listings')->where('id', auth()->user()->id)->get();
+        return view('seeker.job-applied')->with('users', $users);
+    }
 
     /**
      * Delete the user's account.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateResume(ProfileUpdateRequest $request){
+    public function updateResume(ProfileUpdateRequest $request)
+    {
         if ($request->hasFile('resume')) {
             $filePath = $request->file('resume')->store('resume', 'public');
             User::find(auth()->user()->id)->update(['resume' => $filePath]);
