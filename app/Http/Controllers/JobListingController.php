@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class JObListingController extends Controller
@@ -42,5 +43,10 @@ class JObListingController extends Controller
     public function show(Listing $listing)
     {
         return view("show", compact("listing"));
+    }
+    public function company($id, $email)
+    {
+        $company = User::with('jobs')->where('id', $id)->where('email', $email)->first();
+        return view('company', compact('company'));
     }
 }

@@ -6,9 +6,14 @@
                     <img src="{{ Storage::url($listing->feature_image) }}" class="card-img-top" alt="Cover Image"
                         style="height: 150px; object-fit: cover;">
                     <div class="card-body">
+                        <a href="{{ route('company', [$listing->profile->id,$listing->profile->email]) }}">
+                            <img src="{{ Storage::url($listing->profile->profile_pic) }}" width="60"
+                                class="rounded-circle" alt="">
+                        </a>
+                        <b>{{ $listing->profile->name }}</b>
                         <h2 class="card-title">{{ $listing->title }}</h2>
                         @if (Session::has('success'))
-                            <div class="alert alert-success">{{Session::get('success')}}</div>
+                            <div class="alert alert-success">{{ Session::get('success') }}</div>
                         @endif
                         <span class="badge bg-primary">{{ $listing->job_type }}</span>
                         <p>Salary: ${{ number_format($listing->salary, 2) }} </p>

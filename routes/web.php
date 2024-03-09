@@ -46,6 +46,7 @@ Route::middleware([])->group(function () {
             Route::get('/home', [JObListingController::class, 'index'])->name('home');
             Route::get('/jobs/{listing:slug}', [JObListingController::class, 'show'])->name('job.show');
             route::post('/resume/upload', [FileUploadController::class, 'store']);
+            route::get('/company/{id}/{email}',[JObListingController::class,'company'])->name('company');
 
         });
     });
