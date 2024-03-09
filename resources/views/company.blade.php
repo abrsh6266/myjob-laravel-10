@@ -25,7 +25,7 @@
                             <h5 class="card-title">{{ $job->title }}</h5>
                             <p class="card-text">Location: {{ $job->address }}</p>
                             <p class="card-text">Salary: ${{ number_format($job->salary, 2) }} per year</p>
-                            <a href="#" class="btn btn-primary">View</a>
+                            <a href="{{ route('job.show', [$job->slug]) }}" class="btn btn-dark">View</a>
                         </div>
                     </div>
                 @endforeach
